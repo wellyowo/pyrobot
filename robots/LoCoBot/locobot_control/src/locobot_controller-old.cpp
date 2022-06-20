@@ -539,9 +539,6 @@ void LoCoBotController::initSubscriber() {
                                                 &LoCoBotController::gripperCloseCallback, this);
     gripper_open_sub_ = node_handle_.subscribe("gripper/open", 10,
                                                &LoCoBotController::gripperOpenCallback, this);
-    set_gripper_sub_ = node_handle_.subscribe("gripper/command", 10,
-                                          &LoCoBotController::setGripperCallback, this);
-    
   }
 
   if (use_group_["camera"]) {
@@ -1172,20 +1169,6 @@ void LoCoBotController::gripperOpenCallback(const std_msgs::Empty::ConstPtr &msg
   dxl_wb_->itemWrite(7, "Goal_PWM", GRIPPER_PWM, &log);
   gripper_state_ = 0;
   gripper_cmd_ = 0;
-}
-
-void LoCoBotController::setGripperCallback(const std_msgs::Float64::ConstPtr &msg) {
-  ROS_INFO("Set gripper");
-  if (use_group_["arm"]) {
-    bool result = false;
-    const char *log;
-    result = dxl_wb_->goalPosition(7, dxl_wb_->convertRadian2Value(7, msg->data), &log);
-    if (!result) {
-      ROS_ERROR("%s", log);
-    }
-  } else {
-    ROS_ERROR("Gipper is not initialized, make sure use_arm:=True and arm motors are connected");
-  }
 }
 
 void LoCoBotController::setPanCallback(const std_msgs::Float64::ConstPtr &msg) {

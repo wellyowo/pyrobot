@@ -107,7 +107,6 @@ class LoCoBotController {
   ros::Subscriber gripper_close_sub_;
   ros::Subscriber set_tilt_sub_;
   ros::Subscriber set_pan_sub_;
-  ros::Subscriber set_gripper_sub_;
 
   // ROS Service Server
   ros::ServiceServer dynamixel_command_server_;
@@ -169,7 +168,6 @@ class LoCoBotController {
   void stopExecutionJ5Callback(const std_msgs::Empty::ConstPtr &msg);
   void gripperCloseCallback(const std_msgs::Empty::ConstPtr &msg);
   void gripperOpenCallback(const std_msgs::Empty::ConstPtr &msg);
-  void setGripperCallback(const std_msgs::Float64::ConstPtr &msg);
   void setTiltCallback(const std_msgs::Float64::ConstPtr &msg);
   void setPanCallback(const std_msgs::Float64::ConstPtr &msg);
   void cameraStatePublish(void);
