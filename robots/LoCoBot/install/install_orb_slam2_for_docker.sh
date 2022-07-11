@@ -7,6 +7,7 @@ if ! [[ $(ldconfig -p | grep libpangolin) ]]; then
     PANGOLIN_FOLDER=~/Pangolin
     if [ ! -d "$PANGOLIN_FOLDER" ]; then
 		git clone https://github.com/stevenlovegrove/Pangolin.git
+		cd $PANGOLIN_FOLDER
         git fetch --all --tags
         git checkout tags/v0.5 -b v5.0-pangolin
 	fi
