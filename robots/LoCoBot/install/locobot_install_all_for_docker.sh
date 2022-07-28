@@ -193,32 +193,32 @@ if [ $INSTALL_TYPE == "full" ]; then
 
 	# STEP 4A: Install librealsense
 
-	# if [ $(dpkg-query -W -f='${Status}' librealsense2 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-	# 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
-	# 	sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
-	# 	sudo apt-get update
-	# 	version="2.39.0-0~realsense0.3571"
-	# 	sudo apt-get -y install librealsense2-udev-rules=${version}
-	# 	sudo apt-get -y install librealsense2-dkms=1.3.11-0ubuntu1
-	# 	sudo apt-get -y install librealsense2=${version}
-	# 	sudo apt-get -y install librealsense2-gl=${version}
-	# 	sudo apt-get -y install librealsense2-utils=${version}
-	# 	sudo apt-get -y install librealsense2-dev=${version}
-	# 	sudo apt-get -y install librealsense2-dbg=${version}
-	# 	sudo apt-mark hold librealsense2*
-	# fi
 	if [ $(dpkg-query -W -f='${Status}' librealsense2 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-		LIBREALSENSE_VERSION="2.36.0"
-		wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_VERSION}.tar.gz
-		tar -xvzf v${LIBREALSENSE_VERSION}.tar.gz
-		rm v${LIBREALSENSE_VERSION}.tar.gz
-		mkdir -p librealsense-${LIBREALSENSE_VERSION}/build
-		cd librealsense-${LIBREALSENSE_VERSION}/build
-		cmake ..
-		make
-		make install
-		rm -rf librealsense-${LIBREALSENSE_VERSION}
+		sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+		sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
+		sudo apt-get update
+		version="2.39.0-0~realsense0.3571"
+		sudo apt-get -y install librealsense2-udev-rules=${version}
+		sudo apt-get -y install librealsense2-dkms=1.3.11-0ubuntu1
+		sudo apt-get -y install librealsense2=${version}
+		sudo apt-get -y install librealsense2-gl=${version}
+		sudo apt-get -y install librealsense2-utils=${version}
+		sudo apt-get -y install librealsense2-dev=${version}
+		sudo apt-get -y install librealsense2-dbg=${version}
+		sudo apt-mark hold librealsense2*
 	fi
+	# if [ $(dpkg-query -W -f='${Status}' librealsense2 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+	# 	LIBREALSENSE_VERSION="2.36.0"
+	# 	wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_VERSION}.tar.gz
+	# 	tar -xvzf v${LIBREALSENSE_VERSION}.tar.gz
+	# 	rm v${LIBREALSENSE_VERSION}.tar.gz
+	# 	mkdir -p librealsense-${LIBREALSENSE_VERSION}/build
+	# 	cd librealsense-${LIBREALSENSE_VERSION}/build
+	# 	cmake ..
+	# 	make
+	# 	make install
+	# 	rm -rf librealsense-${LIBREALSENSE_VERSION}
+	# fi
 
 	# STEP 4B: Install realsense2 SDK from source (in a separate catkin workspace)
 	CAMERA_FOLDER=~/camera_ws
@@ -231,7 +231,7 @@ if [ $INSTALL_TYPE == "full" ]; then
 		cd $CAMERA_FOLDER/src/
     		git clone https://github.com/IntelRealSense/realsense-ros.git
 		cd realsense-ros/
-		git checkout 2.2.15
+		git checkout 2.2.13 #2.2.15 for librealsense_version 2.36
 	fi
 	if [ -d "$CAMERA_FOLDER/devel" ]; then
 		rm -rf $CAMERA_FOLDER/devel
