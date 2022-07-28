@@ -197,12 +197,13 @@ if [ $INSTALL_TYPE == "full" ]; then
 		sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 		sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 		sudo apt-get update
-		version="2.39.0-0~realsense0.3571"
+		version="2.33.0-0~realsense0.2140" # 2.39.0-0~realsense0.3571
 		sudo apt-get -y install librealsense2-udev-rules=${version}
 		sudo apt-get -y install librealsense2-dkms=1.3.11-0ubuntu1
 		sudo apt-get -y install librealsense2=${version}
 		sudo apt-get -y install librealsense2-gl=${version}
 		sudo apt-get -y install librealsense2-utils=${version}
+		sudo apt-get -y install librealsense2-net=${version}
 		sudo apt-get -y install librealsense2-dev=${version}
 		sudo apt-get -y install librealsense2-dbg=${version}
 		sudo apt-mark hold librealsense2*
