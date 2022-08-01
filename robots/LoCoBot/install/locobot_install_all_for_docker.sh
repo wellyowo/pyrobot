@@ -198,7 +198,7 @@ if [ $INSTALL_TYPE == "full" ]; then
 		# sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 		sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo xenial main" -u
 		sudo apt-get update
-		version="2.33.0-0~realsense0.2140" # 2.39.0-0~realsense0.3571
+		version="2.33.1-0~realsense0.2140" # 2.39.0-0~realsense0.3571
 		sudo apt-get -y install librealsense2-udev-rules=${version}
 		sudo apt-get -y install librealsense2-dkms=1.3.11-0ubuntu1
 		sudo apt-get -y install librealsense2=${version}
