@@ -209,8 +209,7 @@ if [ $INSTALL_TYPE == "full" ]; then
 		# sudo apt-mark hold librealsense2*
 		
 		# use ros-distro-realsense2-camera install install specific version of the realsense2
-		ROS_DISTRO = "melodic"
-		sudo apt-get -y install ros-$ROS_DISTRO-realsense2-camera
+		sudo apt-get -y install ros-${ROS_DISTRO}-realsense2-camera
 	fi
 
 	# STEP 4B: Install realsense2 SDK from source (in a separate catkin workspace)
