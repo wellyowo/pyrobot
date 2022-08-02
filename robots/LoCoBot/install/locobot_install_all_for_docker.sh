@@ -204,7 +204,7 @@ if [ $INSTALL_TYPE == "full" ]; then
 		sudo apt-get -y install librealsense2=${version}
 		sudo apt-get -y install librealsense2-gl=${version}
 		sudo apt-get -y install librealsense2-utils=${version}
-		sudo apt-get -y install librealsense2-net=${version}
+		# sudo apt-get -y install librealsense2-net=${version}
 		sudo apt-get -y install librealsense2-dev=${version}
 		sudo apt-get -y install librealsense2-dbg=${version}
 		sudo apt-mark hold librealsense2*
