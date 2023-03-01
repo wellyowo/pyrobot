@@ -21,11 +21,11 @@
 
     <group unless="$(arg use_sim)">
 
-        <group if="$(arg use_camera)">
+        <!-- <group if="$(arg use_camera)">
             <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
                 <arg name="enable_pointcloud" value="false"/>
             </include>
-        </group>
+        </group> -->
 
         <group if="$(arg use_vslam)">
             <group if="$(arg use_camera)">
