@@ -167,7 +167,7 @@ source /opt/ros/$ROS_NAME/setup.bash
 
 # STEP 3 - Install ROS debian dependencies
 declare -a ros_package_names=(
-	"ros-$ROS_NAME-dynamixel-motor" 
+	"ros-$ROS_NAME-dynamixel-sdk"#20230928 for melodic dynamixel library 
 	"ros-$ROS_NAME-moveit" 
 	"ros-$ROS_NAME-trac-ik"
 	"ros-$ROS_NAME-ar-track-alvar"
@@ -181,6 +181,8 @@ declare -a ros_package_names=(
 	"ros-$ROS_NAME-orocos-kdl"
 	"ros-$ROS_NAME-python-orocos-kdl"
   	"ros-$ROS_NAME-ddynamic-reconfigure"
+	"ros-$ROS_NAME-joy-teleop"#20230928 for joy_teleop
+	"ros-$ROS_NAME-joy"#20230928 for joy_teleop
 	#"ros-$ROS_NAME-libcreate"
 	)
 
@@ -414,20 +416,22 @@ if [ $INSTALL_TYPE == "full" ]; then
 	# STEP 7 - Dependencies and config for calibration
 	cd $LOCOBOT_FOLDER
 	chmod +x src/pyrobot/robots/LoCoBot/locobot_navigation/orb_slam2_ros/scripts/gen_cfg.py
-	rosrun orb_slam2_ros gen_cfg.py
+	#rosrun orb_slam2_ros gen_cfg.py #20230928 no roscore how to run it?
+	roslaunch orb_slam2 gen_cfg.launch
 	HIDDEN_FOLDER=~/.robot
 	if [ ! -d "$HIDDEN_FOLDER" ]; then
 		mkdir ~/.robot
 		cp $LOCOBOT_FOLDER/src/pyrobot/robots/LoCoBot/locobot_calibration/config/default.json ~/.robot/
 	fi
 	
-	# STEP 8 - Setup udev rules
-	cd $LOCOBOT_FOLDER/src/pyrobot/robots/LoCoBot
-	sudo cp udev_rules/*.rules /etc/udev/rules.d
-	sudo service udev reload
-	sudo service udev restart
-	sudo udevadm trigger
-	sudo usermod -a -G dialout $USER
+	# STEP 8 - Setup udev rules #20230928 in docker without this part still can work
+	#cd $LOCOBOT_FOLDER/src/pyrobot/robots/LoCoBot
+	#mkdir /etc/udev/rules.d # add 20230928 for no such file or directory error
+	#sudo cp udev_rules/*.rules /etc/udev/rules.d
+	#sudo service udev reload
+	#sudo service udev restart
+	#sudo udevadm trigger
+	#sudo usermod -a -G dialout $USER
 fi
 
 
