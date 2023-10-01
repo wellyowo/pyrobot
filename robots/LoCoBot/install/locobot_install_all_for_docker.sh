@@ -72,7 +72,7 @@ install_packages () {
 	for package_name in "${pkg_names[@]}"; 
 	do
 		if [ $(dpkg-query -W -f='${Status}' $package_name 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-		    sudo apt-get -y install $package_name
+		     apt-get -y install $package_name
 		else
 		    echo "${package_name} is already installed";
 		fi
@@ -107,7 +107,7 @@ install_packages "${package_names[@]}"
 
 # sudo pip install --upgrade cryptography
 # sudo python -m easy_install --upgrade pyOpenSSL
-sudo pip install --upgrade pip==20.3
+pip install --upgrade pip==20.3
 
 
 # STEP 2 - Install ROS 
@@ -151,15 +151,15 @@ sudo pip install --upgrade pip==20.3
 # 	fi
 # fi
 
-sudo apt-get update
+apt-get update
 
 if [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
-	sudo rm /etc/ros/rosdep/sources.list.d/20-default.list
+	rm /etc/ros/rosdep/sources.list.d/20-default.list
 fi
 
-sudo apt -y install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
-sudo apt -y install python-rosdep
-sudo rosdep init
+apt -y install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+apt -y install python-rosdep
+rosdep init
 rosdep update
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source /opt/ros/$ROS_NAME/setup.bash
@@ -167,7 +167,7 @@ source /opt/ros/$ROS_NAME/setup.bash
 
 # STEP 3 - Install ROS debian dependencies
 declare -a ros_package_names=(
-	"ros-$ROS_NAME-dynamixel-sdk"#20230928 for melodic dynamixel library 
+	"ros-$ROS_NAME-dynamixel-sdk" #20230928 for melodic dynamixel library 
 	"ros-$ROS_NAME-moveit" 
 	"ros-$ROS_NAME-trac-ik"
 	"ros-$ROS_NAME-ar-track-alvar"
@@ -181,8 +181,8 @@ declare -a ros_package_names=(
 	"ros-$ROS_NAME-orocos-kdl"
 	"ros-$ROS_NAME-python-orocos-kdl"
   	"ros-$ROS_NAME-ddynamic-reconfigure"
-	"ros-$ROS_NAME-joy-teleop"#20230928 for joy_teleop
-	"ros-$ROS_NAME-joy"#20230928 for joy_teleop
+	"ros-$ROS_NAME-joy-teleop" #20230928 for joy_teleop
+	"ros-$ROS_NAME-joy" #20230928 for joy_teleop
 	#"ros-$ROS_NAME-libcreate"
 	)
 
@@ -211,7 +211,7 @@ if [ $INSTALL_TYPE == "full" ]; then
 		# sudo apt-mark hold librealsense2*
 		
 		# use ros-distro-realsense2-camera install install specific version of the realsense2
-		sudo apt-get -y install ros-${ROS_DISTRO}-realsense2-camera
+		apt-get -y install ros-${ROS_DISTRO}-realsense2-camera
 	fi
 
 	# STEP 4B: Install realsense2 SDK from source (in a separate catkin workspace)
@@ -337,7 +337,7 @@ if [ ! -d "$LOCOBOT_FOLDER/src/turtlebot" ]; then
 	cd orocos-bayesian-filtering/orocos_bfl/
 	./configure
 	make
-	sudo make install
+	make install
 	cd ../
 	make
 	cd ../
@@ -363,8 +363,8 @@ if [ ! -d "$LOCOBOT_FOLDER/src/turtlebot" ]; then
 	mv yujin_ocs/yocs_safety_controller yujin_ocs/yocs_velocity_smoother .
 	rm -rf yujin_ocs
 
-	sudo apt-get install ros-$ROS_NAME-kobuki-* -y
-	sudo apt-get install ros-$ROS_NAME-ecl-streams -y
+	apt-get install ros-$ROS_NAME-kobuki-* -y
+	apt-get install ros-$ROS_NAME-ecl-streams -y
 fi
 
 # STEP 6 - Make a virtual env to install other dependencies (with pip)
