@@ -254,7 +254,7 @@ if [ ! -d "$LOCOBOT_FOLDER/src" ]; then
 fi
 if [ ! -d "$LOCOBOT_FOLDER/src/pyrobot" ]; then
 	cd $LOCOBOT_FOLDER/src
-	git clone https://github.com/jinglinjackychen/pyrobot.git
+	git clone https://github.com/wellyowo/pyrobot.git
 	cd pyrobot
 	git checkout main
 	git submodule update --init --recursive
@@ -416,8 +416,9 @@ if [ $INSTALL_TYPE == "full" ]; then
 	# STEP 7 - Dependencies and config for calibration
 	cd $LOCOBOT_FOLDER
 	chmod +x src/pyrobot/robots/LoCoBot/locobot_navigation/orb_slam2_ros/scripts/gen_cfg.py
-	#rosrun orb_slam2_ros gen_cfg.py #20230928 no roscore how to run it?
-	roslaunch orb_slam2 gen_cfg.launch
+	#rosrun orb_slam2_ros gen_cfg.py #2023092 it will auto launch some launch files and then terminate it?
+	chmod +x src/pyrobot/robots/LoCoBot/locobot_navigation/orb_slam2_ros/scripts/gen_cfg_no_ros.py
+	python src/pyrobot/robots/LoCoBot/locobot_navigation/orb_slam2_ros/scripts/gen_cfg_no_ros.py
 	HIDDEN_FOLDER=~/.robot
 	if [ ! -d "$HIDDEN_FOLDER" ]; then
 		mkdir ~/.robot
